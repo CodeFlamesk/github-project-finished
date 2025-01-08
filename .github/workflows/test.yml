@@ -1,10 +1,10 @@
 name: Test Deploy
-  on: push
+on: push
 jobs: 
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: lint-step
+      - name: Get code
         uses: actions/checkout@v3
        
       - name: install dependencies
