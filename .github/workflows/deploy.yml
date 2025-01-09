@@ -13,8 +13,8 @@ jobs:
   test:
     env:
       MONGODB_CLUSTER_ADDRESS: cluster0.xv8tg.mongodb.net
-      MONGODB_USERNAME: Mikasa
-      MONGODB_PASSWORD: sivs1827
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     runs-on: ubuntu-latest
     steps:
@@ -49,4 +49,4 @@ jobs:
         run: |
           echo "Deploying application with the following environment variables:"
           echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
-          echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
+          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
