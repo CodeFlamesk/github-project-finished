@@ -90,7 +90,7 @@ jobs:
           name: dist-files
 
       - name: Output build contents
-        run: ls dist
+        run: ls 
 
       - name: Deploy website
         run: echo "Deploying..."
