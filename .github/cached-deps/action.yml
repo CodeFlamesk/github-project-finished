@@ -3,6 +3,12 @@ description: 'Ger the dependensies (via npm) and cache them.'
 inputs:
   caching:
     description: 'Whether to cache deprndencies or not'
+    required: false
+    default: 'true'
+outputs:
+  used-cache:
+    description: 'Whether to cache was used'
+    value: ${{ steps.install.outputs.cache }}
 runs: 
   using: 'composite'
   steps: 
@@ -14,5 +20,7 @@ runs:
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true' && inputs.caching != 'true'
-      run: npm ci
+      run: |
+        npm ci
+        echo "cache='${{inputs.caching}}'">>$GITHUB_OUTPUT
       shell: bash
