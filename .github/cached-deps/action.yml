@@ -1,5 +1,8 @@
 mame: 'Get & Cache  Dependencies'
 description: 'Ger the dependensies (via npm) and cache them.'
+inputs:
+  caching:
+    description: 'Whether to cache deprndencies or not'
 runs: 
   using: 'composite'
   steps: 
@@ -10,6 +13,6 @@ runs:
         path: node_modules
         key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
+      if: steps.cache.outputs.cache-hit != 'true' && inputs.caching != 'true'
       run: npm ci
       shell: bash
